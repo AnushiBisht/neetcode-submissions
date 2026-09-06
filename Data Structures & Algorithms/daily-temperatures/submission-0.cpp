@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& temperatures) {
+        stack<pair<int,int>>stack;
+        vector<int>res(temperatures.size(),0);
+        int idx = 0;
+        for(int i=0;i<temperatures.size();i++){
+            int t = temperatures[i];
+            while(!stack.empty()&& t>stack.top().first){
+                auto pair = stack.top();
+                stack.pop();
+                res[pair.second]=i-pair.second;
+            }
+            stack.push({t,i});
+        }
+
+        return res;
+    }
+};
